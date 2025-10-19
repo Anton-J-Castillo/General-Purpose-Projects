@@ -23,46 +23,54 @@ char getComputerChoice(){
 
     return computerChoice;
 }
-bool checkWinner(char userChoice, char computerChoice){
-    if (userChoice == 'r' && computerChoice == 's'){
-        return 1;
+string checkWinner(char userChoice, char computerChoice){
+    if (userChoice == computerChoice){
+        return "Tie";
+    }
+    else if (userChoice == 'r' && computerChoice == 's'){
+        return "User";
     }
     else if (userChoice == 's' && computerChoice == 'p'){
-        return 1;
+        return "User";
     }
     else if (userChoice == 'p' && computerChoice == 'r'){
-        return 1;
+        return "User";
     }
     else{
-        return 0;
+        return "Computer";
     }
 }
 
 int main(){
     char playerChoice;
     char computerChoice;
-    bool winner;
+    string winner;
 
     srand(time(0));
 
-    cout << "This is a game of rock paper scissors" << endl;
-    cout << "Enter your choice: 'r' for rock, 's' for scissors or 'p' for paper" << endl;
-    cin >> playerChoice;
+    do{
+        cout << "This is a game of rock paper scissors" << endl;
+        cout << "Enter your choice: 'r' for rock, 's' for scissors or 'p' for paper" << endl;
+        cin >> playerChoice;
 
-    playerChoice = tolower(playerChoice);
-    computerChoice = getComputerChoice();
+        playerChoice = tolower(playerChoice);
+        computerChoice = getComputerChoice();
 
-    cout << "Your choice was: " << playerChoice << endl;
-    cout << "Computer's choice was: " << computerChoice << endl;
+        cout << "Your choice was: " << playerChoice << endl;
+        cout << "Computer's choice was: " << computerChoice << endl;
 
-    winner = checkWinner(playerChoice, computerChoice);
+        winner = checkWinner(playerChoice, computerChoice);
 
-    if (winner) {
-        cout << "You won" << endl;
-    }
-    else {
-        cout << "You lost" << endl;
-    }
-
+        if (winner == "Tie") {
+            cout << "It was a tie" << endl;
+        }
+        else if (winner == "User"){
+            cout << "You won" << endl;
+        }
+        else {
+            cout << "You lost" << endl;
+        }
+    }while(true);
+        
     return 0;
 }

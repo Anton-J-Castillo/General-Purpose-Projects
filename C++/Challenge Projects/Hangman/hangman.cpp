@@ -8,8 +8,8 @@
 #include <string>
 using namespace std;
 
-string pickRandomWord(vector<string>& words, int size){
-    int randomIndex = rand() % size;
+string pickRandomWord(vector<string>& words){
+    int randomIndex = rand() % words.size();
     
     return words[randomIndex];
 }
@@ -70,18 +70,25 @@ int main(){
     }
 
     string word;
+
     while (getline(file, word)) {  // read line by line
         if (!word.empty()) {
             wordsList.push_back(word);
         }
     }
-    file.close();    string input;
+    file.close();    
 
+    if (wordsList.empty()) {
+        cout << "Error: words.txt is empty!" << endl;
+        return 1;
+    }
+
+    string input;
     char guess;
     int numGuesses = 7;
     vector<char> correctLetters;
     
-    string randomWord = pickRandomWord(wordsList, wordsList.size());
+    string randomWord = pickRandomWord(wordsList);
     
     do {
         
@@ -104,17 +111,13 @@ int main(){
 
         guess = input[0];
 
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input. Please enter a number." << endl;
-            continue;
-        }
-
         if (gotCorrect(guess, correctLetters)) {
             cout << "You already guessed '" << guess << "'!" << endl;
             continue;
         }
+
+        cout << "Checking if letter is in word..." << endl; 
+        this_thread::sleep_for(chrono::seconds(1));
         
         if (checkWordForChar(guess, randomWord, correctLetters) == true){
             correctLetters.push_back(guess);
@@ -131,7 +134,7 @@ int main(){
             break;
         }
         
-    } while(numGuesses >= 0);
+    } while(numGuesses > 0);
 
     return 0;
 }

@@ -33,7 +33,7 @@ int main(){
     int bet;
     int winnings;
 
-    srand(time(0));
+    srand(time(0));{
     string symbols[5] = {"🍇", "🍒", "🍌", "🥝", "🍓"};
     string results[3];
 

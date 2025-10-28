@@ -18,3 +18,9 @@ print(getAddress("Anton", "Jared", "Castillo",
                  zip = "54321",
                  apt = "100"))
 # print(addNumbers(5,45,5,56,6,6))
+
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()

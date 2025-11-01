@@ -1,5 +1,6 @@
 import time
 import threading
+import json
 
 class Engine:
     
@@ -157,6 +158,53 @@ def startDriving(player, carName):
     player.money += totalEarnings    
     
     return True 
+
+
+# def save_player(player, filename="savefile.json"):
+#     data = {
+#         "name": player.name,
+#         "money": player.money,
+#         "ownedCars": [
+#             {
+#                 "name": car.name,
+#                 "price": car.price,
+#                 "money": car.money,
+#                 "speed": car.speed,
+#                 "engine": {
+#                     "name": car.engine.name,
+#                     "price": car.engine.price,
+#                     "money_boost": car.engine.money_boost
+#                 }
+#             }
+#             for car in player.ownedCars
+#         ]
+#     }
+
+#     with open(filename, "w") as f:
+#         json.dump(data, f, indent=4)
+    
+#     print("Game saved!")
+
+# def load_player(filename="savefile.json"):
+#     try:
+#         with open(filename) as f:
+#             data = json.load(f)
+            
+#         player = Player(data["name"])
+#         player.money = data["money"]
+#         player.ownedCars = []
+        
+#         for car_data in data["ownedCars"]:
+#             engine_data = car_data["engine"]
+#             engine = Engine(engine_data["name"], engine_data["price"], engine_data["money_boost"])
+#             car = Car(car_data["name"], car_data["price"], car_data["money"], car_data["speed"], engine)
+#             player.ownedCars.append(car)
+        
+#         print("Game loaded!")
+#         return player
+#     except FileNotFoundError:
+#         print("No save file found. Starting new game.")
+#         return None
        
 def main():
     choice = 0
